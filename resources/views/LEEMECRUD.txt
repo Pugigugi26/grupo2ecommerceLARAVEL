@@ -1,2 +1,7 @@
 Lo que entiendo que por cada producto hay que hacer el CRUD que seria mostrar(Show), crear(create), Listar(Index), editar (edit), eliminar(Delete).
  y hay que hacer una pagina por cada accion de cada familia.
+ get- pedir informacion
+ post- enviar informacion
+ -put- actualizar por completo un dato existente
+ patch -actualizar informacion
+ -delete -eliminar informacion
