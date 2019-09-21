@@ -1,11 +1,9 @@
   <!DOCTYPE html>
   <html lang="en" dir="ltr">
-    <head>
-      <meta charset="utf-8">
-      <title></title>
-    </head>
+      @include('layouts.front.head')
     <body>
-      llegue bien
-      @extends('layouts.front.app')
+      @include('layouts.front.header')
+      llegue bien muy
+        @include('layouts.front.footer')
     </body>
   </html>

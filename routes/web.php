@@ -31,9 +31,12 @@ http: midominio.com/LoginAdministrador
 http: midominio.com/AgregarProductos
 http: midominio.com/Carrito
 */
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/index', function () {
-    return view('/layouts/front/index');
+    return view('layouts.front.index');
 });
 
 Route::get('/faqs', function () {
