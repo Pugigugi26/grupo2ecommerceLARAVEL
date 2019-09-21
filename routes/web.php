@@ -9,6 +9,17 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+Rutas para usuarios? a definir!
+http: midominio.com/index
+http: midominio.com/faqs
+http: midominio.com/productos/{producto}
+http: midominio.com/familia/{familia}
+http: midominio.com/reqistro
+http: midominio.com/Login
+http: midominio.com/LoginAdministrador
+http: midominio.com/AgregarProductos
+http: midominio.com/Carrito
+
 */
 
 Route::get('/index', function () {
