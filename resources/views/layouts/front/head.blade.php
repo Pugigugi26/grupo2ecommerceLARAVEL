@@ -1,8 +1,7 @@
-<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title')</title>
     <title>IDEA COB</title>
     <link href="{{ asset('/css/normalize.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,4 +11,3 @@
     <script src="https://kit.fontawesome.com/23840b815f.js"></script>
     <link href="{{ asset('/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/style.min.css') }}" rel="stylesheet">
-</head>

@@ -31,38 +31,25 @@ http: midominio.com/LoginAdministrador
 http: midominio.com/AgregarProductos
 http: midominio.com/Carrito
 */
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/index', function () {
-    return view('layouts.front.index');
-});
+/*http: midominio.com/index*/
 
-Route::get('/faqs', function () {
-    return view('faqs');
-});
+/*--Paginas principales--*/
 
-Route::get('/contacto', function () {
-    return view('contact');
-});
+Route::get('/home', function () {return view('pages.home');});
+Route::get('/faqs', function () {return view('pages.faqs');});
+Route::get('/contacto', function () {return view('pages.contact');});
+Route::get('/familias', function () {return view('pages.families');});
+Route::get('/login', function () {return view('pages.login');});
+Route::get('/registro', function () {return view('pages.register');});
+Route::get('/admin', function () {return view('pages.admin.adminHome');});
 
-Route::get('/productos', function () {
-    return view('product');
-});
+/*--Panel y paginas de Admin--*/
 
-Route::get('/registro', function () {
-    return view('registro');
-});
 
-Route::post('/register', function () {
-
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::post('/login', function () {
-
-});
+/*-- CREO RECORDAR QUE ACA HAY QUE HACE RUTA DOBLE, DE GET Y POST PERO NO ME ACUERDO ASI QUE LAS DEJO A MEDIO HACER -- Agustina --
+Route::get('/admin/familias', function () {return view('pages.admin.families');});
+Route::get('/admin/nuevaFamilia', function () {return view('pages.admin.addfamily');});
+Route::get('/admin/editarFamilia', function () {return view('pages.admin.editfamilies');});
+Route::get('/admin/listarFamilias', function () {return view('pages.admin.families');});
+--*/
