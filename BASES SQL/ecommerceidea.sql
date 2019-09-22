@@ -17,15 +17,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema ecommerceidea
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `ecommerceidea`;
 CREATE SCHEMA IF NOT EXISTS `ecommerceidea` DEFAULT CHARACTER SET latin1 ;
--- -----------------------------------------------------
--- Schema bsm
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema bsm
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bsm` DEFAULT CHARACTER SET latin1 ;
 USE `ecommerceidea` ;
 
 -- -----------------------------------------------------
@@ -39,29 +32,12 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`family` (
   `image` VARCHAR(255) NULL DEFAULT NULL,
   `code` VARCHAR(3) NOT NULL,
   `category` VARCHAR(45) NOT NULL,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `ecommerceidea`.`familysize`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`familysize` ;
-
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`familysize` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `family_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_sizes_family1_idx` (`family_id` ASC) VISIBLE,
-  CONSTRAINT `fk_sizes_family1`
-    FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -73,14 +49,16 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`lens` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `angle` INT(11) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
-  `price` INT(11) NOT NULL,
-  `familysize_id` INT(11) NOT NULL,
+  `image` VARCHAR(255),
+  `price` decimal(10,2) NOT NULL,
+  `family_id` INT(11) NOT NULL,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_lens_familysize1_idx` (`familysize_id` ASC) VISIBLE,
-  CONSTRAINT `fk_lens_familysize1`
-    FOREIGN KEY (`familysize_id`)
-    REFERENCES `ecommerceidea`.`familysize` (`id`)
+  INDEX `fk_lens_family1_idx` (`family_id` ASC),
+  CONSTRAINT `fk_lens_family1`
+    FOREIGN KEY (`family_id`)
+    REFERENCES `ecommerceidea`.`family` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -95,18 +73,20 @@ DROP TABLE IF EXISTS `ecommerceidea`.`driver` ;
 
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`driver` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `familysize_id` INT(11) NOT NULL,
+  `family_id` INT(11) NOT NULL,
   `dim` BINARY(4) NOT NULL,
   `brand` VARCHAR(20) NULL,
   `current` INT(10) NOT NULL,
   `voltage` INT(10) NOT NULL,
-  `image` VARCHAR(255) NULL,
-  `price` INT(11) NOT NULL,
+  `image` VARCHAR(255),
+  `price` decimal(10,2) NOT NULL,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_driver_familysize1_idx` (`familysize_id` ASC) VISIBLE,
-  CONSTRAINT `fk_driver_familysize1`
-    FOREIGN KEY (`familysize_id`)
-    REFERENCES `ecommerceidea`.`familysize` (`id`)
+  INDEX `fk_driver_family1_idx` (`family_id` ASC),
+  CONSTRAINT `fk_driver_family1`
+    FOREIGN KEY (`family_id`)
+    REFERENCES `ecommerceidea`.`family` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -122,16 +102,18 @@ DROP TABLE IF EXISTS `ecommerceidea`.`frame` ;
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`frame` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `image` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(255),
   `description` VARCHAR(255) NULL DEFAULT NULL,
-  `price` INT(11) NOT NULL,
-  `familysize_id` INT(11) NOT NULL,
-  `image2` VARCHAR(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `family_id` INT(11) NOT NULL,
+  `image2` VARCHAR(255),
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_frame_familysize1_idx` (`familysize_id` ASC) VISIBLE,
-  CONSTRAINT `fk_frame_familysize1`
-    FOREIGN KEY (`familysize_id`)
-    REFERENCES `ecommerceidea`.`familysize` (`id`)
+  INDEX `fk_frame_family1_idx` (`family_id` ASC),
+  CONSTRAINT `fk_frame_family1`
+    FOREIGN KEY (`family_id`)
+    REFERENCES `ecommerceidea`.`family` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -146,17 +128,19 @@ DROP TABLE IF EXISTS `ecommerceidea`.`LED` ;
 
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`LED` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `power` INT(11) NOT NULL,
-  `size` VARCHAR(20) NOT NULL,
+  `power` decimal NOT NULL,
+  `size` VARCHAR(20),
   `color_t` INT(11) NOT NULL,
-  `image` VARCHAR(255) NULL,
-  `price` INT(11) NOT NULL,
-  `familysize_id` INT(11) NOT NULL,
+  `image` VARCHAR(255),
+  `price` decimal NOT NULL,
+  `family_id` INT(11) NOT NULL,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_LED_familysize1_idx` (`familysize_id` ASC) VISIBLE,
-  CONSTRAINT `fk_LED_familysize1`
-    FOREIGN KEY (`familysize_id`)
-    REFERENCES `ecommerceidea`.`familysize` (`id`)
+  INDEX `fk_LED_family1_idx` (`family_id` ASC),
+  CONSTRAINT `fk_LED_family1`
+    FOREIGN KEY (`family_id`)
+    REFERENCES `ecommerceidea`.`family` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -170,210 +154,221 @@ COLLATE = utf8mb4_unicode_ci;
 DROP TABLE IF EXISTS `ecommerceidea`.`colors` ;
 
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`colors` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `color` VARCHAR(7) NOT NULL,
-  `price` INT(11) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`colors_has_familysize`
+-- Table `ecommerceidea`.`colors_has_family`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`colors_has_familysize` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`colors_has_family` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`colors_has_familysize` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`colors_has_family` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `colors_id` INT NOT NULL,
-  `familysize_id` INT(11) NOT NULL,
-  PRIMARY KEY (`colors_id`, `familysize_id`),
-  INDEX `fk_colors_has_familysize_familysize1_idx` (`familysize_id` ASC) VISIBLE,
-  INDEX `fk_colors_has_familysize_colors1_idx` (`colors_id` ASC) VISIBLE,
-  CONSTRAINT `fk_colors_has_familysize_colors1`
+  `family_id` INT NOT NULL,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  INDEX `fk_colors_has_family_family1_idx` (`family_id` ASC),
+  INDEX `fk_colors_has_family_colors1_idx` (`colors_id` ASC),
+  CONSTRAINT `fk_colors_has_family_colors1`
     FOREIGN KEY (`colors_id`)
     REFERENCES `ecommerceidea`.`colors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_colors_has_familysize_familysize1`
-    FOREIGN KEY (`familysize_id`)
-    REFERENCES `ecommerceidea`.`familysize` (`id`)
+  CONSTRAINT `fk_colors_has_family_family1`
+    FOREIGN KEY (`family_id`)
+    REFERENCES `ecommerceidea`.`family` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
-USE `bsm` ;
-
--- -----------------------------------------------------
--- Table `bsm`.`optiongroups`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`optiongroups` ;
-
-CREATE TABLE IF NOT EXISTS `bsm`.`optiongroups` (
-  `OptionGroupID` INT(11) NOT NULL AUTO_INCREMENT,
-  `OptionGroupName` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`OptionGroupID`))
-ENGINE = MyISAM
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
-
+USE `ecommerceidea` ;
 
 -- -----------------------------------------------------
--- Table `bsm`.`options`
+-- Table `ecommerceidea`.`orderdetails`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`options` ;
 
-CREATE TABLE IF NOT EXISTS `bsm`.`options` (
-  `OptionID` INT(11) NOT NULL AUTO_INCREMENT,
-  `OptionGroupID` INT(11) NULL DEFAULT NULL,
-  `OptionName` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`OptionID`))
-ENGINE = MyISAM
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
+DROP TABLE IF EXISTS `ecommerceidea`.`item` ;
 
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`item` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `led_id` INT(11) NOT NULL,
+  `lens_id` INT(11) NOT NULL,
+  `colors_id` INT(11) NOT NULL,
+  `frame_id` INT(11) NOT NULL,
+  `driver_id` INT(11) NOT NULL,  
+  `price` decimal NOT NULL,
+`image` VARCHAR(255),
+  `code` VARCHAR(20) NULL DEFAULT NULL,
+  `quantity` INT(4) NOT NULL DEFAULT 1,
+     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  INDEX `fk_item_led1_idx` (`led_id` ASC),
+  CONSTRAINT `fk_item_led1`
+    FOREIGN KEY (`led_id`)
+    REFERENCES `ecommerceidea`.`led` (`id`),
+INDEX `fk_item_frame1_idx` (`frame_id` ASC),
+CONSTRAINT `fk_item_frame1`
+    FOREIGN KEY (`frame_id`)
+    REFERENCES `ecommerceidea`.`frame` (`id`),
+INDEX `fk_item_lens1_idx` (`lens_id` ASC),
+CONSTRAINT `fk_item_lens1`
+    FOREIGN KEY (`lens_id`)
+    REFERENCES `ecommerceidea`.`lens` (`id`),
+INDEX `fk_item_colors1_idx` (`colors_id` ASC),
+CONSTRAINT `fk_item_colors1`
+    FOREIGN KEY (`colors_id`)
+    REFERENCES `ecommerceidea`.`colors` (`id`),
+INDEX `fk_item_driver1_idx` (`driver_id` ASC),
+CONSTRAINT `fk_item_driver1`
+    FOREIGN KEY (`driver_id`)
+    REFERENCES `ecommerceidea`.`driver` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
--- -----------------------------------------------------
--- Table `bsm`.`orderdetails`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`orderdetails` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`wishlist` ;
 
-CREATE TABLE IF NOT EXISTS `bsm`.`orderdetails` (
-  `DetailID` INT(11) NOT NULL AUTO_INCREMENT,
-  `DetailOrderID` INT(11) NOT NULL,
-  `DetailProductID` INT(11) NOT NULL,
-  `DetailName` VARCHAR(250) NOT NULL,
-  `DetailPrice` FLOAT NOT NULL,
-  `DetailSKU` VARCHAR(50) NOT NULL,
-  `DetailQuantity` INT(11) NOT NULL,
-  PRIMARY KEY (`DetailID`))
-ENGINE = MyISAM
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
-
-
--- -----------------------------------------------------
--- Table `bsm`.`orders`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`orders` ;
-
-CREATE TABLE IF NOT EXISTS `bsm`.`orders` (
-  `OrderID` INT(11) NOT NULL AUTO_INCREMENT,
-  `OrderUserID` INT(11) NOT NULL,
-  `OrderAmount` FLOAT NOT NULL,
-  `OrderShipName` VARCHAR(100) NOT NULL,
-  `OrderShipAddress` VARCHAR(100) NOT NULL,
-  `OrderShipAddress2` VARCHAR(100) NOT NULL,
-  `OrderCity` VARCHAR(50) NOT NULL,
-  `OrderState` VARCHAR(50) NOT NULL,
-  `OrderZip` VARCHAR(20) NOT NULL,
-  `OrderCountry` VARCHAR(50) NOT NULL,
-  `OrderPhone` VARCHAR(20) NOT NULL,
-  `OrderFax` VARCHAR(20) NOT NULL,
-  `OrderShipping` FLOAT NOT NULL,
-  `OrderTax` FLOAT NOT NULL,
-  `OrderEmail` VARCHAR(100) NOT NULL,
-  `OrderDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `OrderShipped` TINYINT(1) NOT NULL DEFAULT 0,
-  `OrderTrackingNumber` VARCHAR(80) NULL DEFAULT NULL,
-  PRIMARY KEY (`OrderID`))
-ENGINE = MyISAM
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`wishlist` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `item_id` INT(11) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  INDEX `fk_wishlist_item1_idx` (`item_id` ASC),
+  CONSTRAINT `fk_wishlist_item1`
+    FOREIGN KEY (`item_id`)
+    REFERENCES `ecommerceidea`.`item` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
 
--- -----------------------------------------------------
--- Table `bsm`.`productcategories`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`productcategories` ;
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`orderitem` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `item_id` INT(11) NOT NULL,
+  `order_id` INT(11) NOT NULL,
+  `quantity` INT(11) NOT NULL DEFAULT 1,
+  `price` decimal(10,2) NOT NULL,  
+  `description` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  INDEX `fk_orderitem_item1_idx` (`item_id` ASC),
+  CONSTRAINT `fk_orderitem_item1`
+    FOREIGN KEY (`item_id`)
+    REFERENCES `ecommerceidea`.`item` (`id`),
+INDEX `fk_orderitem_order1_idx` (`order_id` ASC),
+  CONSTRAINT `fk_orderitem_order1`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `ecommerceidea`.`order` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `bsm`.`productcategories` (
-  `CategoryID` INT(11) NOT NULL AUTO_INCREMENT,
-  `CategoryName` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`CategoryID`))
-ENGINE = MyISAM
-AUTO_INCREMENT = 7
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
+DROP TABLE IF EXISTS `ecommerceidea`.`order` ;
 
-
--- -----------------------------------------------------
--- Table `bsm`.`productoptions`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`productoptions` ;
-
-CREATE TABLE IF NOT EXISTS `bsm`.`productoptions` (
-  `ProductOptionID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ProductID` INT(10) UNSIGNED NOT NULL,
-  `OptionID` INT(10) UNSIGNED NOT NULL,
-  `OptionPriceIncrement` DOUBLE NULL DEFAULT NULL,
-  `OptionGroupID` INT(11) NOT NULL,
-  PRIMARY KEY (`ProductOptionID`))
-ENGINE = MyISAM
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
-
-
--- -----------------------------------------------------
--- Table `bsm`.`products`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`products` ;
-
-CREATE TABLE IF NOT EXISTS `bsm`.`products` (
-  `ProductID` INT(12) NOT NULL AUTO_INCREMENT,
-  `ProductSKU` VARCHAR(50) NOT NULL,
-  `ProductName` VARCHAR(100) NOT NULL,
-  `ProductPrice` FLOAT NOT NULL,
-  `ProductWeight` FLOAT NOT NULL,
-  `ProductCartDesc` VARCHAR(250) NOT NULL,
-  `ProductShortDesc` VARCHAR(1000) NOT NULL,
-  `ProductLongDesc` TEXT NOT NULL,
-  `ProductThumb` VARCHAR(100) NOT NULL,
-  `ProductImage` VARCHAR(100) NOT NULL,
-  `ProductCategoryID` INT(11) NULL DEFAULT NULL,
-  `ProductUpdateDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `ProductStock` FLOAT NULL DEFAULT NULL,
-  `ProductLive` TINYINT(1) NULL DEFAULT 0,
-  `ProductUnlimited` TINYINT(1) NULL DEFAULT 1,
-  `ProductLocation` VARCHAR(250) NULL DEFAULT NULL,
-  PRIMARY KEY (`ProductID`))
-ENGINE = MyISAM
-AUTO_INCREMENT = 991
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`order` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `total` decimal NOT NULL,
+  `price` decimal NOT NULL,  
+  `description` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `orderitem_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_order_orderitem1_idx` (`orderitem_id` ASC),
+  CONSTRAINT `fk_order_orderitem1`
+    FOREIGN KEY (`orderitem_id`)
+    REFERENCES `ecommerceidea`.`orderitem` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
 
 
--- -----------------------------------------------------
--- Table `bsm`.`users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bsm`.`users` ;
-
-CREATE TABLE IF NOT EXISTS `bsm`.`users` (
-  `UserID` INT(11) NOT NULL AUTO_INCREMENT,
-  `UserEmail` VARCHAR(500) NULL DEFAULT NULL,
-  `UserPassword` VARCHAR(500) NULL DEFAULT NULL,
-  `UserFirstName` VARCHAR(50) NULL DEFAULT NULL,
-  `UserLastName` VARCHAR(50) NULL DEFAULT NULL,
-  `UserCity` VARCHAR(90) NULL DEFAULT NULL,
-  `UserState` VARCHAR(20) NULL DEFAULT NULL,
-  `UserZip` VARCHAR(12) NULL DEFAULT NULL,
-  `UserEmailVerified` TINYINT(1) NULL DEFAULT 0,
-  `UserRegistrationDate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
-  `UserVerificationCode` VARCHAR(20) NULL DEFAULT NULL,
-  `UserIP` VARCHAR(50) NULL DEFAULT NULL,
-  `UserPhone` VARCHAR(20) NULL DEFAULT NULL,
-  `UserFax` VARCHAR(20) NULL DEFAULT NULL,
-  `UserCountry` VARCHAR(20) NULL DEFAULT NULL,
-  `UserAddress` VARCHAR(100) NULL DEFAULT NULL,
-  `UserAddress2` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`UserID`))
-ENGINE = MyISAM
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_german2_ci;
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+DROP TABLE IF EXISTS `ecommerceidea`.`users` ;
+
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Email` VARCHAR(500) NULL DEFAULT NULL,
+  `Password` VARCHAR(500) NULL DEFAULT NULL,
+  `FirstName` VARCHAR(50) NULL DEFAULT NULL,
+  `LastName` VARCHAR(50) NULL DEFAULT NULL,
+  `City` VARCHAR(90) NULL DEFAULT NULL,
+  `State` VARCHAR(20) NULL DEFAULT NULL,
+  `Zip` VARCHAR(12) NULL DEFAULT NULL,
+  `EmailVerified` TINYINT(1) NULL DEFAULT 0,
+  `RegistrationDate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  `VerificationCode` VARCHAR(20) NULL DEFAULT NULL,
+  `IP` VARCHAR(50) NULL DEFAULT NULL,
+  `Phone` VARCHAR(20) NULL DEFAULT NULL,
+  `Country` VARCHAR(20) NULL DEFAULT NULL,
+  `Address` VARCHAR(100) NULL DEFAULT NULL,
+  `Address2` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+INSERT INTO `led`(`power`,`color_t`,`price`,`family_id`) VALUES 
+
+(7.00, 2700 , 20, 1),
+(13,  2700, 30, 1),
+(18,  2700, 40, 1),
+(7, 3000, 20, 1),
+(13, 3000, 30, 1),
+(18, 3000, 40, 1),
+(9, 2700, 20, 2),
+(13, 2700, 30, 2),
+(18, 2700, 40, 2),
+(3.2, 2700, 20, 3),
+(19, 2700, 30, 3),
+(7, 2700, 40, 3);
+
+
+
+
+INSERT INTO `frame`(`name`,`image`, `description`,`price`,`family_id`, `image2`) VALUES 
+
+('Redondo', 'fedro_marcored1.jpg' ,'Marco redondo con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcored2.jpg' ),
+('Cuadrado', 'fedro_marcocuad1.jpg', 'Marco cuadrado con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcocuad2.jpg'),
+('Redondo recedido', 'fedro_redrec1.jpg','Marco redondo recedido con aro basculante, para empotrables Fedro',10.5, 1,  'fedro_redrec2.jpg'),
+('Cuadrado recedido', 'fedro_cuadrec1.jpg','Marco cuadrado recedido con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_cuadrec2.jpg'),
+('Cuerpo cilindrico', 'Croll_cabcil1.jpg','Cuerpo cilindrico con aro antiglare para cabezales Croll',10.5, 2, 'Croll_cabcil2.jpg'),
+('Frente circular', 'Uro_frentecirc1.jpg','Frente de vidrio sellado para proyectores Uro',10.5, 3, 'Uro_frentecirc2.jpg');
+
+
+INSERT INTO `driver`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VALUES 
+
+(1,1,'Helvar', 350 , 220, 10.5 ),
+(1,1,'TCI', 350 , 220, 10.5 ),
+(2,1,'Phillips', 700 , 220, 10.5 ),
+(3,1,'HEP', 700 , 220, 10.5 );
+
+
+INSERT INTO `family`(`name`,`code`,`category` ) VALUES 
+
+('Fedro','FED', 'empotrable'),
+('Croll','CRL', 'cabezal'),
+('Uro','URO', 'exterior');
+
+INSERT INTO `colors`(`name`,`color`) VALUES 
+
+('Blanco texturado','#FFFFFF'),
+('Negro texturado','#000000'),
+('Gris grafito','#46E51');
