@@ -134,6 +134,8 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`leds` (
   `power` DECIMAL NOT NULL,
   `size` VARCHAR(20),
   `color_t` INT(11) NOT NULL,
+  `minflux` INT(11) NULL,
+   `maxflux` INT(11) NULL,
   `image` VARCHAR(255),
   `price` decimal(10,2) NOT NULL,
   `family_id` INT(11) NOT NULL,
@@ -271,7 +273,6 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`item` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `led_id` INT(11) NOT NULL,
   `lens_id` INT(11) NOT NULL,
-  `color_id` INT(11) NOT NULL,
   `frame_id` INT(11) NOT NULL,
   `driver_id` INT(11) NOT NULL,  
   `order_id` INT(11) NOT NULL, 
@@ -294,10 +295,6 @@ INDEX `items_lens_id_foreign` (`lens_id` ASC),
 CONSTRAINT `items_lens_id_foreign`
     FOREIGN KEY (`lens_id`)
     REFERENCES `ecommerceidea`.`lenses` (`id`),
-INDEX `items_color_id_foreign` (`color_id` ASC),
-CONSTRAINT `items_color_id_foreign`
-    FOREIGN KEY (`color_id`)
-    REFERENCES `ecommerceidea`.`colors` (`id`),
 INDEX `items_driver_id_foreign` (`driver_id` ASC),
 CONSTRAINT `items_driver_id_foreign`
     FOREIGN KEY (`driver_id`)
