@@ -6,16 +6,20 @@
 
 <main>
     <div class="containeringreso d-flex align-items-center" style="background-color: #24fcc4">
-
-        <form class="container formssmall" method="post">
+        @if(Session::has('message'))
+            <div class="alert alert-success text-center" role="alert">
+                {{Session::get('message')}}
+            </div>
+        @endif
+        <form action="{{url('/login')}}" class="container formssmall" method="post">
             <h2>/ LOG IN</h2>
             <div class="form-row">
                 <div class="form-control threed  my-2">
                     <i class="fas fa-envelope icon"></i>
-                    <input type="text" placeholder="Correo" name="email" >
+                    <input type="email" placeholder="Correo" name="email" >
                 </div>
             </div>
-                <span class="error">Usuario no encontrado</span>
+
             <div class="form-row">
                 <div class="form-control threed  my-2">
                     <i class="fas fa-key icon"></i>
