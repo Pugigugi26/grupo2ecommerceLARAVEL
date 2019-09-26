@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('identification_numbers')->nullable();
             $table->string('cbu')->nullable();
             $table->timestamps();
-            $table->foreing('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
