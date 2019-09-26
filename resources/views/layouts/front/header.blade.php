@@ -24,17 +24,17 @@
             </ul>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <a class="nav-link" href="carrito.php"><i class="fa fa-shopping-cart" aria-hidden="true" title="Carrito"></i></a>
+                  <a class="nav-link" href=""><i class="fa fa-shopping-cart" aria-hidden="true" title="Carrito"></i></a>
               </li>
                 <li class="nav-item">
-              <a class="nav-link" href="salirusuario.php"><i class="fas fa-power-off" aria-hidden="true" title="Salir"></i> </a>
+              <a class="nav-link" href=""><i class="fas fa-power-off" aria-hidden="true" title="Salir"></i> </a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="ingreso.php">INGRESA</a>
+                  <a class="nav-link" href="">INGRESA</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="register.php">REGISTRATE</a>
+                  <a class="nav-link" href="">REGISTRATE</a>
                 </li>
             </ul>
         </div>

@@ -35,7 +35,7 @@ http: midominio.com/Carrito
 /*http: midominio.com/index*/
 
 /*--Paginas principales--*/
-
+Route::get('/', function () {return view('welcome');});
 Route::get('/home', function () {return view('pages.home');});
 Route::get('/faqs', function () {return view('pages.faqs');});
 Route::get('/contacto', function () {return view('pages.contact');});
