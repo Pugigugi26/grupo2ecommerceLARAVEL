@@ -40,13 +40,17 @@ Route::get('/index', "PagesController@home");
 Route::get('/faqs', "PagesController@faqs");
 Route::get('/contacto', "PagesController@contact");
 Route::get('/familias', "FamiliesController@index");
-Route::get('/login', "UsersController@login");
-Route::POST('/login', "UsersController@login");
-Route::get('/registro', "UsersController@register");
-Route::post('/registro', "UsersController@register");
+Route::get('/register', "UsersController@register");
+Route::post('/register', "UsersController@register");
 Route::get('/admin', "PagesController@admin");
 
-
+///  Usuarios Login /////
+Route::post('/login', "UsersController@login");
+Route::get('/login_page','UsersController@index');
+Route::post('/register_user','UsersController@register');
+Route::get('/login', "UsersController@login");
+Route::post('/user_login','UsersController@login');
+Route::get('/logout','UsersController@logout');
 
 /*--Panel y paginas de Admin--*/
 
