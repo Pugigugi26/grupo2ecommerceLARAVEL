@@ -1,6 +1,6 @@
 @extends ('layouts.front.websitestructure')
 
-@section ('title', 'FAQ'S')
+@section ('title', 'FAQS')
 
 @section ('content')
 <main>

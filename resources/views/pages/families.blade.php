@@ -4,4 +4,9 @@
 
 @section ('content')
 
+
+@foreach ($families as $family)
+<p> {{$family["name"]}} </p>
+@endforeach
+
 @endsection ('content')
