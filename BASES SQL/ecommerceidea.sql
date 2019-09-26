@@ -22,17 +22,18 @@ CREATE SCHEMA IF NOT EXISTS `ecommerceidea` DEFAULT CHARACTER SET latin1 ;
 USE `ecommerceidea` ;
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`family`
+-- Table `ecommerceidea`.`families`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`family` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`families` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`family` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`families` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `image` VARCHAR(255) NULL DEFAULT NULL,
   `code` VARCHAR(3) NOT NULL,
   `category` VARCHAR(45) NOT NULL,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -41,24 +42,25 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`lens`
+-- Table `ecommerceidea`.`lenses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`lens` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`lenses` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`lens` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`lenses` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `angle` INT(11) NOT NULL,
   `image` VARCHAR(255),
   `price` decimal(10,2) NOT NULL,
   `family_id` INT(11) NOT NULL,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_lens_family1_idx` (`family_id` ASC),
-  CONSTRAINT `fk_lens_family1`
+  INDEX `lenses_family_id_foreign` (`family_id` ASC),
+  CONSTRAINT `lenses_family_id_foreign`
     FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
+    REFERENCES `ecommerceidea`.`families` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -67,26 +69,27 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`driver`
+-- Table `ecommerceidea`.`drivers`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`driver` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`drivers` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`driver` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`drivers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `family_id` INT(11) NOT NULL,
-  `dim` BINARY(4) NOT NULL,
+  `dim` VARCHAR(255),
   `brand` VARCHAR(20) NULL,
   `current` INT(10) NOT NULL,
   `voltage` INT(10) NOT NULL,
   `image` VARCHAR(255),
-  `price` decimal(10,2) NOT NULL,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `price` DECIMAL(10,2) NOT NULL,
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_driver_family1_idx` (`family_id` ASC),
-  CONSTRAINT `fk_driver_family1`
+  INDEX `drivers_family_id_foreign` (`family_id` ASC),
+  CONSTRAINT `drivers_family_id_foreign`
     FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
+    REFERENCES `ecommerceidea`.`families` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -95,11 +98,11 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`frame`
+-- Table `ecommerceidea`.`frames`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`frame` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`frames` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`frame` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`frames` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `image` VARCHAR(255),
@@ -107,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`frame` (
   `price` decimal(10,2) NOT NULL,
   `family_id` INT(11) NOT NULL,
   `image2` VARCHAR(255),
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_frame_family1_idx` (`family_id` ASC),
-  CONSTRAINT `fk_frame_family1`
+  INDEX `frames_family_id_foreign` (`family_id` ASC),
+  CONSTRAINT `frames_family_id_foreign`
     FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
+    REFERENCES `ecommerceidea`.`families` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -122,25 +125,28 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`LED`
+-- Table `ecommerceidea`.`leds`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`LED` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`leds` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`LED` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`leds` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `power` decimal NOT NULL,
+  `power` DECIMAL NOT NULL,
   `size` VARCHAR(20),
   `color_t` INT(11) NOT NULL,
+  `minflux` INT(11) NULL,
+   `maxflux` INT(11) NULL,
   `image` VARCHAR(255),
-  `price` decimal NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `family_id` INT(11) NOT NULL,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+`description` VARCHAR(255) NULL DEFAULT NULL,
+`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_LED_family1_idx` (`family_id` ASC),
-  CONSTRAINT `fk_LED_family1`
+  INDEX `leds_family_id_foreign` (`family_id` ASC),
+  CONSTRAINT `leds_family_id_foreign`
     FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
+    REFERENCES `ecommerceidea`.`families` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -156,7 +162,8 @@ DROP TABLE IF EXISTS `ecommerceidea`.`colors` ;
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`colors` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `color` VARCHAR(7) NOT NULL,
+  `number` INT(3) NULL,
+  `color_hex_code` VARCHAR(7) NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`))
@@ -166,27 +173,27 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerceidea`.`colors_has_family`
+-- Table `ecommerceidea`.`color_frame`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecommerceidea`.`colors_has_family` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`color_frame` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`colors_has_family` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `colors_id` INT NOT NULL,
-  `family_id` INT NOT NULL,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`color_frame` (
+`id` INT(11) NOT NULL AUTO_INCREMENT,
+  `color_id` INT NOT NULL,
+  `frame_id` INT NOT NULL,
+`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_colors_has_family_family1_idx` (`family_id` ASC),
-  INDEX `fk_colors_has_family_colors1_idx` (`colors_id` ASC),
-  CONSTRAINT `fk_colors_has_family_colors1`
-    FOREIGN KEY (`colors_id`)
+  INDEX `color_frame_color_id` (`color_id` ASC),
+  INDEX `color_frame_frame_id` (`frame_id` ASC),
+  CONSTRAINT `color_frame_color_id`
+    FOREIGN KEY (`color_id`)
     REFERENCES `ecommerceidea`.`colors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_colors_has_family_family1`
-    FOREIGN KEY (`family_id`)
-    REFERENCES `ecommerceidea`.`family` (`id`)
+  CONSTRAINT `color_frame_frame_id`
+    FOREIGN KEY (`frame_id`)
+    REFERENCES `ecommerceidea`.`frames` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -195,110 +202,44 @@ COLLATE = utf8mb4_unicode_ci;
 
 USE `ecommerceidea` ;
 
--- -----------------------------------------------------
--- Table `ecommerceidea`.`orderdetails`
--- -----------------------------------------------------
 
-DROP TABLE IF EXISTS `ecommerceidea`.`item` ;
+DROP TABLE IF EXISTS `ecommerceidea`.`wishlists` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`item` (
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`wishlists` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `led_id` INT(11) NOT NULL,
-  `lens_id` INT(11) NOT NULL,
-  `colors_id` INT(11) NOT NULL,
-  `frame_id` INT(11) NOT NULL,
-  `driver_id` INT(11) NOT NULL,  
-  `price` decimal NOT NULL,
-`image` VARCHAR(255),
-  `code` VARCHAR(20) NULL DEFAULT NULL,
-  `quantity` INT(4) NOT NULL DEFAULT 1,
-     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_item_led1_idx` (`led_id` ASC),
-  CONSTRAINT `fk_item_led1`
-    FOREIGN KEY (`led_id`)
-    REFERENCES `ecommerceidea`.`led` (`id`),
-INDEX `fk_item_frame1_idx` (`frame_id` ASC),
-CONSTRAINT `fk_item_frame1`
-    FOREIGN KEY (`frame_id`)
-    REFERENCES `ecommerceidea`.`frame` (`id`),
-INDEX `fk_item_lens1_idx` (`lens_id` ASC),
-CONSTRAINT `fk_item_lens1`
-    FOREIGN KEY (`lens_id`)
-    REFERENCES `ecommerceidea`.`lens` (`id`),
-INDEX `fk_item_colors1_idx` (`colors_id` ASC),
-CONSTRAINT `fk_item_colors1`
-    FOREIGN KEY (`colors_id`)
-    REFERENCES `ecommerceidea`.`colors` (`id`),
-INDEX `fk_item_driver1_idx` (`driver_id` ASC),
-CONSTRAINT `fk_item_driver1`
-    FOREIGN KEY (`driver_id`)
-    REFERENCES `ecommerceidea`.`driver` (`id`))
+  `user_id` INT(11) NOT NULL,
+   INDEX `wishlists_user_id_foreign` (`user_id` ASC),
+  CONSTRAINT `wishlists_user_id_foreign`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `ecommerceidea`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `ecommerceidea`.`wishlist` ;
 
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`wishlist` (
+DROP TABLE IF EXISTS `ecommerceidea`.`orders` ;
+
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`orders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `item_id` INT(11) NOT NULL,
+  `totalprice` DECIMAL NOT NULL,  
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  INDEX `fk_wishlist_item1_idx` (`item_id` ASC),
-  CONSTRAINT `fk_wishlist_item1`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `ecommerceidea`.`item` (`id`))
+  `user_id` INT(11) NOT NULL,
+   INDEX `orders_user_id_foreign` (`user_id` ASC),
+  CONSTRAINT `orders_user_id_foreign`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `ecommerceidea`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
-
-
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`orderitem` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `item_id` INT(11) NOT NULL,
-  `order_id` INT(11) NOT NULL,
-  `quantity` INT(11) NOT NULL DEFAULT 1,
-  `price` decimal(10,2) NOT NULL,  
-  `description` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  INDEX `fk_orderitem_item1_idx` (`item_id` ASC),
-  CONSTRAINT `fk_orderitem_item1`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `ecommerceidea`.`item` (`id`),
-INDEX `fk_orderitem_order1_idx` (`order_id` ASC),
-  CONSTRAINT `fk_orderitem_order1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `ecommerceidea`.`order` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-DROP TABLE IF EXISTS `ecommerceidea`.`order` ;
-
-CREATE TABLE IF NOT EXISTS `ecommerceidea`.`order` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `total` decimal NOT NULL,
-  `price` decimal NOT NULL,  
-  `description` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `orderitem_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_order_orderitem1_idx` (`orderitem_id` ASC),
-  CONSTRAINT `fk_order_orderitem1`
-    FOREIGN KEY (`orderitem_id`)
-    REFERENCES `ecommerceidea`.`orderitem` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-
-
 
 
 DROP TABLE IF EXISTS `ecommerceidea`.`users` ;
@@ -325,7 +266,53 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 
-INSERT INTO `led`(`power`,`color_t`,`price`,`family_id`) VALUES 
+
+DROP TABLE IF EXISTS `ecommerceidea`.`item` ;
+
+CREATE TABLE IF NOT EXISTS `ecommerceidea`.`item` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `led_id` INT(11) NOT NULL,
+  `lens_id` INT(11) NOT NULL,
+  `frame_id` INT(11) NOT NULL,
+  `driver_id` INT(11) NOT NULL,  
+  `order_id` INT(11) NOT NULL, 
+ `wishlist_id` INT(11) NOT NULL, 
+  `price` decimal NOT NULL,
+  `image` VARCHAR(255),
+  `code` VARCHAR(20) NULL DEFAULT NULL,
+  `quantity` INT(4) NOT NULL DEFAULT 1,
+`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  INDEX `items_led_id_foreign` (`led_id` ASC),
+  CONSTRAINT `items_led_id_foreign`
+    FOREIGN KEY (`led_id`)
+    REFERENCES `ecommerceidea`.`leds` (`id`),
+INDEX `items_frame_id_foreign` (`frame_id` ASC),
+CONSTRAINT `items_frame_id_foreign`
+    FOREIGN KEY (`frame_id`)
+    REFERENCES `ecommerceidea`.`frames` (`id`),
+INDEX `items_lens_id_foreign` (`lens_id` ASC),
+CONSTRAINT `items_lens_id_foreign`
+    FOREIGN KEY (`lens_id`)
+    REFERENCES `ecommerceidea`.`lenses` (`id`),
+INDEX `items_driver_id_foreign` (`driver_id` ASC),
+CONSTRAINT `items_driver_id_foreign`
+    FOREIGN KEY (`driver_id`)
+    REFERENCES `ecommerceidea`.`drivers` (`id`),
+INDEX `items_order_id_foreign` (`order_id` ASC),
+CONSTRAINT `items_order_id_foreign`
+    FOREIGN KEY (`order_id`)
+    REFERENCES `ecommerceidea`.`orders` (`id`),
+INDEX `items_wishlist_id_foreign` (`wishlist_id` ASC),
+CONSTRAINT `items_wishlist_id_foreign`
+    FOREIGN KEY (`wishlist_id`)
+    REFERENCES `ecommerceidea`.`wishlists` (`id`),
+      PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+INSERT INTO `leds`(`power`,`color_t`,`price`,`family_id`) VALUES 
 
 (7.00, 2700 , 20, 1),
 (13,  2700, 30, 1),
@@ -343,7 +330,7 @@ INSERT INTO `led`(`power`,`color_t`,`price`,`family_id`) VALUES
 
 
 
-INSERT INTO `frame`(`name`,`image`, `description`,`price`,`family_id`, `image2`) VALUES 
+INSERT INTO `frames`(`name`,`image`, `description`,`price`,`family_id`, `image2`) VALUES 
 
 ('Redondo', 'fedro_marcored1.jpg' ,'Marco redondo con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcored2.jpg' ),
 ('Cuadrado', 'fedro_marcocuad1.jpg', 'Marco cuadrado con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcocuad2.jpg'),
@@ -353,7 +340,7 @@ INSERT INTO `frame`(`name`,`image`, `description`,`price`,`family_id`, `image2`)
 ('Frente circular', 'Uro_frentecirc1.jpg','Frente de vidrio sellado para proyectores Uro',10.5, 3, 'Uro_frentecirc2.jpg');
 
 
-INSERT INTO `driver`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VALUES 
+INSERT INTO `drivers`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VALUES 
 
 (1,1,'Helvar', 350 , 220, 10.5 ),
 (1,1,'TCI', 350 , 220, 10.5 ),
@@ -361,13 +348,13 @@ INSERT INTO `driver`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VAL
 (3,1,'HEP', 700 , 220, 10.5 );
 
 
-INSERT INTO `family`(`name`,`code`,`category` ) VALUES 
+INSERT INTO `families`(`name`,`code`,`category` ) VALUES 
 
 ('Fedro','FED', 'empotrable'),
 ('Croll','CRL', 'cabezal'),
 ('Uro','URO', 'exterior');
 
-INSERT INTO `colors`(`name`,`color`) VALUES 
+INSERT INTO `colors`(`name`,`color_hex_code`) VALUES 
 
 ('Blanco texturado','#FFFFFF'),
 ('Negro texturado','#000000'),
