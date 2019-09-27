@@ -226,7 +226,7 @@ DROP TABLE IF EXISTS `ecommerceidea`.`orders` ;
 
 CREATE TABLE IF NOT EXISTS `ecommerceidea`.`orders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `totalprice` DECIMAL NOT NULL,  
+  `totalprice` DECIMAL NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
@@ -274,9 +274,9 @@ CREATE TABLE IF NOT EXISTS `ecommerceidea`.`item` (
   `led_id` INT(11) NOT NULL,
   `lens_id` INT(11) NOT NULL,
   `frame_id` INT(11) NOT NULL,
-  `driver_id` INT(11) NOT NULL,  
-  `order_id` INT(11) NOT NULL, 
- `wishlist_id` INT(11) NOT NULL, 
+  `driver_id` INT(11) NOT NULL,
+  `order_id` INT(11) NOT NULL,
+  `wishlist_id` INT(11) NOT NULL,
   `price` decimal NOT NULL,
   `image` VARCHAR(255),
   `code` VARCHAR(20) NULL DEFAULT NULL,
@@ -312,7 +312,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_unicode_ci;
 
-INSERT INTO `leds`(`power`,`color_t`,`price`,`family_id`) VALUES 
+INSERT INTO `leds`(`power`,`color_t`,`price`,`family_id`) VALUES
 
 (7.00, 2700 , 20, 1),
 (13,  2700, 30, 1),
@@ -330,7 +330,7 @@ INSERT INTO `leds`(`power`,`color_t`,`price`,`family_id`) VALUES
 
 
 
-INSERT INTO `frames`(`name`,`image`, `description`,`price`,`family_id`, `image2`) VALUES 
+INSERT INTO `frames`(`name`,`image`, `description`,`price`,`family_id`, `image2`) VALUES
 
 ('Redondo', 'fedro_marcored1.jpg' ,'Marco redondo con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcored2.jpg' ),
 ('Cuadrado', 'fedro_marcocuad1.jpg', 'Marco cuadrado con aro basculante, para empotrables Fedro',10.5, 1, 'fedro_marcocuad2.jpg'),
@@ -340,7 +340,7 @@ INSERT INTO `frames`(`name`,`image`, `description`,`price`,`family_id`, `image2`
 ('Frente circular', 'Uro_frentecirc1.jpg','Frente de vidrio sellado para proyectores Uro',10.5, 3, 'Uro_frentecirc2.jpg');
 
 
-INSERT INTO `drivers`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VALUES 
+INSERT INTO `drivers`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VALUES
 
 (1,1,'Helvar', 350 , 220, 10.5 ),
 (1,1,'TCI', 350 , 220, 10.5 ),
@@ -348,13 +348,13 @@ INSERT INTO `drivers`(`family_id`,`dim`,`brand`,`current`,`voltage`,`price` ) VA
 (3,1,'HEP', 700 , 220, 10.5 );
 
 
-INSERT INTO `families`(`name`,`code`,`category` ) VALUES 
+INSERT INTO `families`(`name`,`code`,`category` ) VALUES
 
 ('Fedro','FED', 'empotrable'),
 ('Croll','CRL', 'cabezal'),
 ('Uro','URO', 'exterior');
 
-INSERT INTO `colors`(`name`,`color_hex_code`) VALUES 
+INSERT INTO `colors`(`name`,`color_hex_code`) VALUES
 
 ('Blanco texturado','#FFFFFF'),
 ('Negro texturado','#000000'),

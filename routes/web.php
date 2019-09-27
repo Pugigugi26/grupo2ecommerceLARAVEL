@@ -39,10 +39,12 @@ http: midominio.com/Carrito
 Route::get('/index', "PagesController@home");
 Route::get('/faqs', "PagesController@faqs");
 Route::get('/contacto', "PagesController@contact");
-Route::get('/familias', "FamiliesController@index");
 Route::get('/login', "PagesController@login");
 Route::get('/registro', "PagesController@register");
 Route::get('/admin', "PagesController@admin");
+
+Route::get('/familias', "FamiliesController@index");
+
 
 
 

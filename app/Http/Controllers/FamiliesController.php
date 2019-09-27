@@ -9,10 +9,10 @@ use App\Family;
 class FamiliesController extends Controller
 {
     public function index() {
-        $families = family::all;
+        $families = family::all();
 
         $vac = compact("families");
 
-        return view ("pages.families", $vac);
+        return view ("families.index", $vac);
     }
 }
