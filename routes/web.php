@@ -39,6 +39,7 @@ http: midominio.com/Carrito
 Route::get('/index', "PagesController@home");
 Route::get('/faqs', "PagesController@faqs");
 Route::get('/contacto', "PagesController@contact");
+<<<<<<< HEAD
 Route::get('/login', "PagesController@login");
 Route::get('/registro', "PagesController@register");
 Route::get('/admin', "PagesController@admin");
@@ -47,6 +48,20 @@ Route::get('/familias', "FamiliesController@index");
 
 
 
+=======
+Route::get('/familias', "FamiliesController@index");
+Route::get('/register', "UsersController@register");
+Route::post('/register', "UsersController@register");
+Route::get('/admin', "PagesController@admin");
+
+///  Usuarios Login /////
+Route::post('/login', "UsersController@login");
+Route::get('/login_page','UsersController@index');
+Route::post('/register_user','UsersController@register');
+Route::get('/login', "UsersController@login");
+Route::post('/user_login','UsersController@login');
+Route::get('/logout','UsersController@logout');
+>>>>>>> 637b7548660005d6679b35a0a85ea1d4bfad3628
 
 /*--Panel y paginas de Admin--*/
 

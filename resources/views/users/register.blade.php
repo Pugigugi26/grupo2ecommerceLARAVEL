@@ -6,43 +6,45 @@
 
 <main>
     <div class="containeringreso d-flex align-items-center bg-black">
-        <form class="container formssmall" method="post">
+        <form  actiion={{url('/exitoso_user')}} class="container formssmall" method="post">
             <h2 class="letrablanca">/ REGISTRO</h2>
             <div class="form-row">
                 <div class="form-control form-control-light threed threed-blanco  my-2">
                     <i class="fas fa-user icon" style="color: white"></i>
-                    <input class="letrablanca" type="text" placeholder="Nombre" name="name" value"">
+                    <input class="letrablanca" type="text" placeholder="Nombre" name="name" value"{{old('name')}}">
                 </div>
+                <span class="text-danger">{{$errors->first('name')}}</span>
             </div>
-                <span class="error"></span><br>
+
             <div class="form-row">
                 <div class="form-control form-control-light threed threed-blanco my-2">
                     <i class="fas fa-user icon"  style="color: white"></i>
-                    <input class="letrablanca" type="text" placeholder="Apellido" name="lastname" value"">
+                    <input class="letrablanca" type="text" placeholder="Apellido" name="lastname" value"{{old('lastname')}}">
                 </div>
+                <span class="text-danger">{{$errors->first('lastname')}}</span>
             </div>
-                <span class="error"></span>
+
             <div class="form-row">
                 <div class="form-control form-control-light threed threed-blanco  my-2">
                     <i class="fas fa-envelope icon"  style="color: white"></i>
-                    <input class="letrablanca" type="text" placeholder="Email" name="email" value"">
+                    <input class="letrablanca" type="text" placeholder="Email" name="email" value"{{old('email')}}">
                 </div>
+                <span class="text-danger">{{$errors->first('email')}}</span>
             </div>
-                <span class="error"></span> <br>
+
             <div class="form-row">
                 <div class="form-control  form-control-light threed threed-blanco my-2">
                     <i class="fas fa-key icon"  style="color: white"></i>
-                    <input class="letrablanca" type="password" placeholder="Contraseña" name="password">
+                    <input class="letrablanca" type="password" placeholder="Contraseña" name="password" value="{{old('password')}}">
                 </div>
+                <span class="text-danger">{{$errors->first('password')}}</span>
             </div>
-
-                <span class="error"></span> <br>
-
             <div class="form-row">
                 <div class="form-control form-control-light threed threed-blanco  my-2">
                     <i class="fas fa-key icon"  style="color: white"></i>
-                    <input class="letrablanca" type="password" placeholder="Repetir contraseña" name="password2">
+                    <input class="letrablanca" type="password" placeholder="Repetir contraseña" name="password_confirmation" value="{{old('password_confirmation')}}">
                 </div>
+                <span class="text-danger">{{$errors->first('password_confirmation')}}</span>
             </div>
             <div class="form-row d-flex justify-content-center my-2">
                 <button class="btn btn-fnegro flex-grow-1" type="submit" value="submit">Registrarme</button>
