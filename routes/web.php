@@ -36,10 +36,16 @@ http: midominio.com/Carrito
 
 /*--Paginas principales--*/
 
-Route::get('/index', "PagesController@home");
+Route::get('/', "PagesController@home");
 Route::get('/faqs', "PagesController@faqs");
 Route::get('/contacto', "PagesController@contact");
-Route::get('/familias', "FamiliesController@index");
+
+/*--FAMILIAS--*/
+Route::get('/familias', "FamiliesController@index")->name("families.index");
+Route::get('/familias/{id}', "FamiliesController@show")->name("families.show");
+
+/*--MARCOS -*/
+Route::get('/marcos', "FramesController@index");
 
 ///  Usuarios Login /////
 Route::get('/register', "UsersController@register");

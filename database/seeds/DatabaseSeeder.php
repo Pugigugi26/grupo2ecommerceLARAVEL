@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call(FamilyTableSeeder::class);
+        $this->call(FrameTableSeeder::class);
 
     }
 }
