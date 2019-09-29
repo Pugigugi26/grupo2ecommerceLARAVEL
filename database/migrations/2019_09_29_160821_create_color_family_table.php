@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDriversTable extends Migration
+class CreateColorFamilyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,12 @@ class CreateDriversTable extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('color_family', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('dim', 20);
-            $table->string('model', 255);
-            $table->string('brand', 255);
-            $table->integer('current');
-            $table->string('voltage');
-            $table->string('image', 255);
-            $table->decimal('price', 8, 2);
-            $table->string('description', 500);
+            $table->unsignedBigInteger('color_id');
+            $table->foreign('color_id')->references('id')->on('colors');
             $table->unsignedBigInteger('family_id');
             $table->foreign('family_id')->references('id')->on('families');            $table->timestamps();
-
         });
     }
 
@@ -36,6 +29,6 @@ class CreateDriversTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('color_family');
     }
 }

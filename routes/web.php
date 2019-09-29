@@ -36,9 +36,9 @@ http: midominio.com/Carrito
 
 /*--Paginas principales--*/
 
-Route::get('/', "PagesController@home");
-Route::get('/faqs', "PagesController@faqs");
-Route::get('/contacto', "PagesController@contact");
+Route::get('/', "Front\HomeController@home");
+Route::get('/faqs', "Front\FaqsController@faqs");
+Route::get('/contacto', "Front\ContactController@contact");
 
 /*--FAMILIAS--*/
 Route::get('/familias', "FamiliesController@index")->name("families.index");
@@ -57,7 +57,7 @@ Route::get('/login', "UsersController@login");
 Route::post('/user_login','UsersController@login');
 Route::get('/logout','UsersController@logout');
 
-Route::get('/admin', "PagesController@admin");
+Route::get('/admin', "\Admin\DashboardController@show");
 
 /*-- CREO RECORDAR QUE ACA HAY QUE HACE RUTA DOBLE, DE GET Y POST PERO NO ME ACUERDO ASI QUE LAS DEJO A MEDIO HACER -- Agustina --
 Route::get('/admin/familias', function () {return view('pages.admin.families');});

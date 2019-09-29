@@ -20,7 +20,8 @@ class CreateFramesTable extends Migration
             $table->string('description', 500);
             $table->decimal('price', 8, 2);
             $table->string('image2', 255);
-            $table->integer('family_id');
+            $table->unsignedBigInteger('family_id');
+            $table->foreign('family_id')->references('id')->on('families');
             $table->timestamps();
         });
     }

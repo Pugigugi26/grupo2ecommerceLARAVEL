@@ -10,16 +10,16 @@
                     <a class="nav-link" href="" >HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">PRODUCTOS</a>
+                    <a class="nav-link" href="familias">PRODUCTOS</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">NOSOTROS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">FAQS</a>
+                    <a class="nav-link" href="faqs">FAQS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">CONTACTO</a>
+                    <a class="nav-link" href="contacto">CONTACTO</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">

@@ -3,20 +3,24 @@
 @section ('title', 'Familias')
 
 @section ('content')
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach ($families as $family)
+            <div class="col-4 border-primary vh-100" style="background-image: url('{{$family->image}}')">
+
+            </div>
+            @endforeach
+        </div>
+
+    </div>
+</main>
 
 
-@foreach ($families as $family)
-
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"> {{$family["name"]}}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{route("families.show", $family->id)}}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
 
 
-@endforeach
+
+
+
 
 @endsection ('content')

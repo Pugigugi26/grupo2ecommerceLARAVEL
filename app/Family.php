@@ -18,10 +18,14 @@ public $table ="families";
     }
 
     public function lenses() {
-        return $this->hasMany(Lens::class);
+        return $this->hasMany(Optic::class);
     }
 
     public function drivers() {
         return $this->hasMany(Driver::class);
+    }
+
+    public function colors() {
+        return $this->belongsToMany("App\Color", "color_family", "family_id", "color_id");
     }
 }

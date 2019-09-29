@@ -16,14 +16,15 @@ class CreateLedsTable extends Migration
         Schema::create('leds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255);
-            $table->decimal('power', 2, 2);
+            $table->decimal('power');
             $table->string('size', 20);
             $table->integer('color_t');
             $table->integer('min_flux');
             $table->integer('max_flux');
             $table->string('image', 255);
             $table->decimal('price', 8, 2);
-            $table->integer('family_id');
+            $table->unsignedBigInteger('family_id');
+            $table->foreign('family_id')->references('id')->on('families');
             $table->string('description', 500);
             $table->timestamps();
         });

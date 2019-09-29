@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FamilyTableSeeder::class);
         $this->call(FrameTableSeeder::class);
+        $this->call(DriverTableSeeder::class);
+        $this->call(LedTableSeeder::class);
+        $this->call(OpticTableSeeder::class);
+        $this->call(ColorTableSeeder::class);
 
     }
 }
