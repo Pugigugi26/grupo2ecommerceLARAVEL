@@ -10,6 +10,7 @@
             <div class="col-12 col-lg-4 border-primary vh-100 d-flex align-items-end family-image" style="background-image: url('{{$family->image}}')">
                 <div class="h-25 w-auto bg-black-transp-50 p-4 family-caption">
                     <a href=familias/{{{$family->id}}}> <h2>{{$family->name}}</h2>
+                        <h4 class="text-capitalize">{{$family->category}}</h4>
                     <p>{{$family->description}}</p></a>
                 </div>
             </div>

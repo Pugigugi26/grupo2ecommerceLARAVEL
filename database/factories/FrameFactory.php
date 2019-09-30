@@ -16,7 +16,7 @@ $factory->define(Frame::class, function (Faker $faker) {
         'image'=> "",
         'description'=>$faker->text(255),
         'price'=> $faker->randomFloat(2, 2000, 5000),
-        'image2'=> "",
+        'image2'=> "images/fedromarcoc.jpg",
         'family_id'=> $families->random()->id,
 
 

@@ -20,7 +20,7 @@ $factory->define(Driver::class, function (Faker $faker) {
         'voltage'=>$faker->randomNumber(3,false),
         'price'=> $faker->randomFloat(2, 2000, 5000),
         'description'=>$faker->text(255),
-        'image'=> "",
+        'image'=> "images/driverHelvar.jpg",
         'family_id'=> $families->random()->id,
         // ACA ME ESTA GENERANDO UN FOREIGN KEY MENTIROSO, SI HUBIERA GENERADO LA RELACION NO PODRIA HACERLO //
 

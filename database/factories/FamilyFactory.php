@@ -11,7 +11,7 @@ $factory->define(Family::class, function (Faker $faker) {
         'category'=> $faker->word(),
         'description'=>$faker->text(255),
         'code'=> $faker-> word(),
-        'image'=> "",
+        'image'=> "images/fedrofamily.jpg",
         //
     ];
 });

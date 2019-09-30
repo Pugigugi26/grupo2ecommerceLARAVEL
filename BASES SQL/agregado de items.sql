@@ -70,7 +70,7 @@ SET name = 'Fedro Medium',  power = '18,00', size = '50x50x100mm', color_t = '30
 WHERE id = 5;
 
 UPDATE leds  
-SET name = 'Fedro Alta Potencia',  power = '33,40', size = '80x80x100mm', color_t = '3000', min_flux = '1500', max_flux = '1800', image = 'images/fedro334.jpg', price = 200,  family_id = '2'
+SET name = 'Fedro A. Potencia',  power = '33,40', size = '80x80x100mm', color_t = '3000', min_flux = '1500', max_flux = '1800', image = 'images/fedro334.jpg', price = 200,  family_id = '2'
 WHERE id = 6;
 
 UPDATE optics  
@@ -104,3 +104,27 @@ WHERE id = 7;
 UPDATE optics  
 SET name = 'Fedro Flood', angle = '50',  image = 'images/empotrablemed.jpg', price = 200,  family_id = '2'
 WHERE id = 8;
+
+UPDATE drivers 
+SET brand = 'Helvar 700ma', voltage = '220',   voltage = '500',  dim = 'TRIAC', family_id = '2'
+WHERE id = 1;
+
+UPDATE drivers 
+SET brand = 'Helvar 300ma', voltage = '220',   voltage = '500',  dim = 'DALI', family_id = '2'
+WHERE id = 2;
+
+UPDATE drivers 
+SET brand = 'Helvar 500ma', voltage = '220',   voltage = '500',  dim = 'NO DIM', family_id = '2'
+WHERE id = 3;
+
+UPDATE drivers 
+SET brand = 'Phillips 700ma', voltage = '220',   voltage = '500',  dim = 'TRIAC', family_id = '2'
+WHERE id = 4;
+
+UPDATE drivers 
+SET brand = 'TCI 700ma', voltage = '220',   voltage = '500',  dim = 'TRIAC', family_id = '2'
+WHERE id = 5;
+
+UPDATE drivers 
+SET brand = 'TCI 700ma', voltage = '220',   voltage = '500',  dim = 'TRIAC', family_id = '2'
+WHERE id = 6;

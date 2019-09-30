@@ -15,7 +15,7 @@ $factory->define(Optic::class, function (Faker $faker) {
 
         'name'=> $faker->unique()->company,
         'angle'=>$faker->randomNumber(3,false),
-        'image'=> "",
+        'image'=> "images/empotrablemed.jpg",
         'price'=> $faker->randomFloat(2, 2000, 5000),
         'description'=>$faker->text(255),
         'family_id'=> $families->random()->id,

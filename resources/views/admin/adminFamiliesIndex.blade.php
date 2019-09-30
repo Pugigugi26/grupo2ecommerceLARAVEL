@@ -11,7 +11,7 @@
                 <button type="button" name="button" class="btn btn-famarilloblanco" onclick="window.location.href='/admin/familias/add'"> Nueva familia</button>
             </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive pb-4">
                 <table class="table table-bordred table-striped table-fixed">
                     <thead>
                         <th>ID</th>

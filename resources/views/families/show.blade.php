@@ -5,9 +5,6 @@
 @section ('content')
 
 
-
-
-
 <div class="container-fluid containerproducto">
   <div class="row" id="headercarro" >
     <h4> / ARMÁ TU LUMINARIA {{$family->name}}</h4>
@@ -28,13 +25,18 @@
                          {{$led->name}}
                       </div>
                       <div class="card-description overflow-hidden">
-                          {{$led->color_t}}
-                      </div>
+                          <ul>
+                              <li>{{$led->color_t . 'K'}}</li>
+                              <li> {{$led->power . 'W'}}</li>
+                          </ul>
+                                              </div>
                       </div>
                       </label>
             @endforeach
         </div>
       </div>
+
+
       <div class="form-item row d-flex justify-content-center">
         <div class="row subtituloproducto">
           <h5 class="subtituloppal"> Lente y angulo de apertura </h5>
@@ -42,24 +44,23 @@
       </div>
       <div class="row h-25  justify-content-center">
           @foreach ($family->optics as $optic)
-                  <label class="col-12  col-md-3  col-lg-2 ">
+                  <label class="col-12  col-md-3 col-lg-3 ">
                     <input type="radio" name="optics" class="card-input-element d-none" value="demo2">
                     <div class="card card-body bg-light d-flex align-items-center mh-">
-                    <img src="../{{$optic->image}}" alt="no estoy" class="w-100">
+                        <div class="">
+                            <img src="../{{$optic->image}}" alt="no estoy" class="w-100">
+                        </div>
                     <div class="card-title">
                        {{$optic->name}}
                     </div>
                     <div class="card-description overflow-hidden">
-                        {{$optic->angle}}
+                        {{$optic->angle .'°'}}
                     </div>
                     </div>
                     </label>
           @endforeach
       </div>
     </div>
-
-
-
 
 
       <div class="form-item row d-flex justify-content-center">
@@ -84,6 +85,33 @@
           @endforeach
       </div>
     </div>
+
+    <div class="form-item row d-flex justify-content-center">
+      <div class="row subtituloproducto">
+        <h5 class="subtituloppal"> Driver </h5>
+        <h6> Lorem ipsum lorem ipsum </h6>
+    </div>
+    <div class="row h-25">
+        @foreach ($family->drivers as $driver)
+                <label class="col-12  col-md-3  col-lg-2 ">
+                  <input type="radio" name="frames" class="card-input-element d-none" value="demo2">
+                  <div class="card card-body bg-light">
+                  <img src="../{{$driver->image}}" alt="no estoy" class="w-100">
+                  <div class="card-title">
+                     {{$driver->brand}}
+                  </div>
+                  <div class="card-description overflow-hidden">
+                      <ul>
+                          <li>{{$driver->dim}}</li>
+                          <li>{{$driver->voltage .'V'}}</li>
+                          <li>{{$driver->current .'mA'}}</li>
+                      </ul>
+                  </div>
+                  </div>
+                  </label>
+        @endforeach
+    </div>
+  </div>
 
 </form>
 

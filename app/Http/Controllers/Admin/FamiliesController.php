@@ -24,7 +24,6 @@ class FamiliesController extends Controller
         $newFamily->description = $form["description"];
         $newFamily->code = $form["code"];
         $newFamily->image = $form["image"];
-
         $newFamily->save();
 
         return redirect ("admin/familias");

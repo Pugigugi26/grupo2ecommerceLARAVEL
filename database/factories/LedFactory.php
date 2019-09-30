@@ -19,7 +19,7 @@ $factory->define(Led::class, function (Faker $faker) {
         'color_t'=>$faker->randomNumber(3,false),
         'min_flux'=>$faker->randomNumber(3,false),
         'max_flux'=>$faker->randomNumber(3,false),
-        'image'=> "",
+        'image'=> "images/fedrosmall7.jpg",
         'price'=> $faker->randomFloat(2, 2000, 5000),
         'family_id'=> $families->random()->id,
         'description'=>$faker->text(255),

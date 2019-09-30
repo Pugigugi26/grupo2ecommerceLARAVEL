@@ -48,7 +48,7 @@
                 <div class="titlesectionindex"> <a href="productos2.php" class="">Armá tu luminaria! </a></div>
             </div>
             <div class="col col-section-2-index col3"style="background-color: #24FCC4" >
-                <div class="titlesectionindex"> <a href="contacto.php"></a>Nuestras familias </div>
+                <div class="titlesectionindex"> <a href="/familias"></a>Nuestras familias </div>
             </div>
         </div>
     </div>

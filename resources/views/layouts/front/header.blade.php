@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="/" >HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="/familias">PRODUCTOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="/familias">FAMILIAS COB</a></li>
                 <li class="nav-item"><a class="nav-link" href="/faqs">FAQS</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contacto">CONTACTO</a></li>
             </ul>
