@@ -11,10 +11,12 @@ class FamiliesController extends Controller
     public function index() {
         $families = family::with('frames', 'lenses', 'leds', 'drivers')->get();
 
-        dd($families->toArray());
+        return view ("families.index", compact("families"));
+    }
 
-        $vac = compact("families");
+    public function indexAdmin() {
+        $families = family::all
 
-        return view ("families.index", $vac);
+       return view ("admin.adminFamiliesIndex", compact("families");
     }
 }

@@ -21,7 +21,7 @@
         <div class="row h-25">
             @foreach ($family->leds as $led)
                     <label class="col-12  col-md-3  col-lg-2 ">
-                      <input type="radio" name="demo" class="card-input-element d-none" value="demo2">
+                      <input type="radio" name="leds" class="card-input-element d-none" value="demo2">
                       <div class="card card-body bg-light d-flex align-items-center mh-">
                       <img src="../{{$led->image}}" alt="no estoy" class="w-100">
                       <div class="card-title">
@@ -43,7 +43,7 @@
       <div class="row h-25  justify-content-center">
           @foreach ($family->optics as $optic)
                   <label class="col-12  col-md-3  col-lg-2 ">
-                    <input type="radio" name="demo" class="card-input-element d-none" value="demo2">
+                    <input type="radio" name="optics" class="card-input-element d-none" value="demo2">
                     <div class="card card-body bg-light d-flex align-items-center mh-">
                     <img src="../{{$optic->image}}" alt="no estoy" class="w-100">
                     <div class="card-title">
@@ -70,7 +70,7 @@
       <div class="row h-25">
           @foreach ($family->frames as $frame)
                   <label class="col-12  col-md-3  col-lg-2 ">
-                    <input type="radio" name="demo" class="card-input-element d-none" value="demo2">
+                    <input type="radio" name="frames" class="card-input-element d-none" value="demo2">
                     <div class="card card-body bg-light d-flex align-items-center mh-">
                     <img src="../{{$frame->image}}" alt="no estoy" class="w-100">
                     <div class="card-title">

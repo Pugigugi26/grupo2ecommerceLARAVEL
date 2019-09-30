@@ -5,11 +5,14 @@
     </head>
     <body>
         @include('layouts.front.header')
-        <div class="">
+        <div class="container-fluid">
+            <div class="row d-flex align-items-stretch">
             @include('layouts.front.adminsidebar')
             @yield('content')
 
-            @include('layouts.front.footer')
+            </div>
         </div>
+        @include('layouts.front.footer')
+
     </body>
 </html>

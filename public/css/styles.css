@@ -23,6 +23,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     border: none;
     color: black;
+    font-weight: 200;
 }
 
 h1 {
@@ -184,6 +185,7 @@ background: linear-gradient(#7f00ff, #e100ff);
   width: 100%;
   }
 
+
 .subtituloproducto {
   width: 100%;
   display: flex;
@@ -204,28 +206,7 @@ label h5  {
     font-size: 1.25rem;
     padding-bottom: 0px;
       }
-.table td, .table th{
-padding-left: 0.75rem;
-padding-right: 0.75rem;
-padding-bottom: 0rem;
-padding-top: 0rem;
-border: none;
 
-}
-
-
-.table td{
-font-weight: 400;
-text-transform: uppercase;
-font-size: 0.75rem;
-text-align: left;
-}
-
-.table th{
-font-weight: 300;
-font-size: 0.75rem;
-text-align: left;
-}
 
 .detalle {
   padding-top: 1rem;
@@ -296,7 +277,7 @@ header span i  {
 
 /* ----------- FULLSLIDER HOME ------------ */
 .carousel-item {
-  height: 50vh;
+  height: 100vh;
   min-height: 350px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
@@ -1222,3 +1203,17 @@ label {
     transform: rotateZ(0deg);
   }
 }
+
+.containeradmin {
+    width: 95%;
+
+    }
+
+    .hola {
+        min-height: 100vh;
+    }
+
+    .imgadmin {
+        max-width: 100px;
+
+        }
