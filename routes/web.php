@@ -41,7 +41,7 @@ Route::get('/faqs', "Front\FaqsController@faqs");
 Route::get('/contacto', "Front\ContactController@contact");
 
 /*--FAMILIAS--*/
-Route::get('/familias', "FamiliesController@index")->name("families.index");
+Route::get('/familias', "FamiliesController@index")->name("families.index")->middleware('auth');
 Route::get('/familias/{id}', "FamiliesController@show")->name("families.show");
 
 /*--MARCOS -*/
@@ -58,6 +58,10 @@ Route::post('/user_login','UsersController@login');
 Route::get('/logout','UsersController@logout');
 
 Route::get('/admin', "\Admin\DashboardController@show");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 /*-- CREO RECORDAR QUE ACA HAY QUE HACE RUTA DOBLE, DE GET Y POST PERO NO ME ACUERDO ASI QUE LAS DEJO A MEDIO HACER -- Agustina --
 Route::get('/admin/familias', function () {return view('pages.admin.families');});
