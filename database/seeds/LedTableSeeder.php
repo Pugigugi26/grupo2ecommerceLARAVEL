@@ -11,7 +11,7 @@ class LedTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Led::class, 10)->create();
+        factory(\App\Led::class, 6)->create();
 
     }
 }

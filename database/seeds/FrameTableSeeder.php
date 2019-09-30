@@ -12,6 +12,6 @@ class FrameTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(\App\Frame::class, 10)->create();
+        factory(\App\Frame::class, 6)->create();
     }
 }

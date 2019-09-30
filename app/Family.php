@@ -17,7 +17,7 @@ public $table ="families";
         return $this->hasMany(Led::class);
     }
 
-    public function lenses() {
+    public function optics() {
         return $this->hasMany(Optic::class);
     }
 

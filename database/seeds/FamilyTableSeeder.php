@@ -11,6 +11,6 @@ class FamilyTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Family::class, 10)->create();
+        factory(\App\Family::class, 6)->create();
     }
 }

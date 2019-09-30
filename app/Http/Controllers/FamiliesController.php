@@ -48,7 +48,7 @@ class FamiliesController extends Controller
      */
     public function show($id)
     {
-        $family = family::with('frames', 'lenses', 'leds', 'drivers')->find($id);
+        $family = family::with('drivers','frames', 'optics', 'leds')->find($id);
 
         return view ("families.show", compact("family"));
     }
