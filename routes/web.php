@@ -41,7 +41,7 @@ Route::get('/faqs', "Front\FaqsController@faqs");
 Route::get('/contacto', "Front\ContactController@contact");
 
 /*--FAMILIAS--*/
-Route::get('/familias', "FamiliesController@index")->name("families.index")->middleware('auth');
+Route::get('/familias', "FamiliesController@index")->name("families.index");
 Route::get('/familias/{id}', "FamiliesController@show")->name("families.show");
 
 /*--MARCOS -*/

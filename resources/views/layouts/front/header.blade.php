@@ -31,10 +31,10 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="">INGRESA</a>
+                  <a class="nav-link" href="login">INGRESA</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">REGISTRATE</a>
+                  <a class="nav-link" href="register">REGISTRATE</a>
                 </li>
             </ul>
         </div>
