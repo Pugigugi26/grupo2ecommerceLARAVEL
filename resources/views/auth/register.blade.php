@@ -4,7 +4,7 @@
 <main>
     <div class="containeringreso d-flex align-items-center bg-black">
         <form method="POST" action="{{ route('register') }}"class="container formssmall">
-            <div class="letrablanca"> <h2> {{ __('Registro') }} </h2></div>
+            <div class="letrablanca"> <h2> {{ __('/ Registro') }} </h2></div>
                         @csrf
 
                     <div class="form-row">

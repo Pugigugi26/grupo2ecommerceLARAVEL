@@ -47,20 +47,22 @@
               </div>
           </div>
 
-          <div class="form-group row mb-0">
-              <div class="form-row d-flex justify-content-center my-2">
-                  <button type="submit"  class="btn btn-famarilloblanco flex-grow-1">
-                      {{ __('Login') }}
-                  </button>
-
-                  @if (Route::has('password.request'))
-                      <a class="btn btn-link" href="{{ route('password.request') }}">
-                          {{ __('Olvidaste tu contraseña?') }}
-                      </a>
-                  @endif
-              </div>
+          <div class="form-row d-flex justify-content-center my-2">
+              <button type="submit"  class="btn btn-famarilloblanco flex-grow-1">
+                  {{ __('Login') }}
+              </button>
           </div>
 
+          <div class="form-row d-flex justify-content-center my-2">
+              @if (Route::has('password.request'))
+                  <a class="btn btn-link" href="{{ route('password.request') }}">
+                      {{ __('Olvidaste tu contraseña?') }}
+                  </a>
+              @endif
+          </div>
+
+          </div>
+</div>
         </form>
     </div>
 </main>
